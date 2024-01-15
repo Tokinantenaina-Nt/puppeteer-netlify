@@ -11,7 +11,7 @@ async function capture() {
     //await page.goto('https://www.getintopc.com');
     await page.goto('https://www.flashscore.mobi/?s=2');
 
-    // await new Promise(resolve => setTimeout(resolve, 2000)); // Pause de 5 secondes
+    // await new Promise(resolve => setTimeout(resolve, 2000));
     await page.screenshot({ path: `screenshot-${random}.png` });
 
     await browser.close();
