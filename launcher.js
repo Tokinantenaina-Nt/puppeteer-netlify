@@ -3,8 +3,8 @@ const path = require('path');
 const random = Math.floor(Math.random() * 100);
 async function capture() {
     const browser = await puppeteer.launch({
-        executablePath: path.join(__dirname, 'Slimjet', 'slimjet.exe'),
-        headless: true
+        //executablePath: path.join(__dirname, 'Slimjet', 'slimjet.exe'),
+       // headless: true
     });
     const page = await browser.newPage();
 
