@@ -1,4 +1,6 @@
-const puppeteer = require('puppeteer-core');
+const puppeteer = require('puppeteer-core')
+const chromium = require('@sparticuz/chromium')
+const cors = require('cors');
 const express = require('express')
 const router = express.Router()
 router.get('/', (req, res) => {
@@ -7,7 +9,14 @@ router.get('/', (req, res) => {
 router.get('/pup', async (req, res) => {
     try {
         const browser = await puppeteer.launch(
-            { executablePath: 'E:\\Slimjet\\slimjet.exe' }
+            //{ executablePath: 'E:\\Slimjet\\slimjet.exe' }
+            {
+                args: chromium.args,
+                defaultViewport: chromium.defaultViewport,
+                executablePath: await chromium.executablePath(),
+                headless: chromium.headless,
+                ignoreHTTPSErrors: true,
+            }
         );
         const page = await browser.newPage();
         await page.goto('https://www.flashscore.mobi/?s=2');
@@ -25,4 +34,7 @@ router.get('/pup', async (req, res) => {
         res.status(500).send('Erreur interne du serveur');
     }
 });
+app.use(cors({
+    origin: '*'
+}));
 module.exports = router
