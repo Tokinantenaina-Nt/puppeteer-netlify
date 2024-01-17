@@ -21,13 +21,24 @@ router.get('/pup', async (req, res) => {
         await page.goto('https://www.flashscore.mobi/?s=2');
 
         // Récupérer le titre de la page
-        const title = await page.title();
+        // const title = await page.title();
+
+        // Capture d'écran de la page
+        const screenshot = await page.screenshot();
+
 
         // Fermer le navigateur
-        await browser.close();
+        // await browser.close();
 
         // Envoyer le titre en réponse
-        res.send(`Le titre de la page est : ${title}`);
+        // res.send(`Le titre de la page est : ${title}`);
+
+        // Envoyer la capture d'écran en réponse
+        res.writeHead(200, {
+            'Content-Type': 'image/png',
+            'Content-Length': screenshot.length,
+        });
+        res.end(screenshot, 'binary');
     } catch (error) {
         console.error('Une erreur s\'est produite :', error);
         res.status(500).send('Erreur interne du serveur');
