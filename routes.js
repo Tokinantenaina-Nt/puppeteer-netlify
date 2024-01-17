@@ -28,7 +28,7 @@ router.get('/pup', async (req, res) => {
 
 
         // Fermer le navigateur
-        // await browser.close();
+        await browser.close();
 
         // Envoyer le titre en réponse
         // res.send(`Le titre de la page est : ${title}`);
