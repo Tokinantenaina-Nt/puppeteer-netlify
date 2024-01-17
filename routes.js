@@ -1,6 +1,5 @@
 const puppeteer = require('puppeteer-core')
 const chromium = require('@sparticuz/chromium')
-const cors = require('cors');
 const express = require('express')
 const router = express.Router()
 router.get('/', (req, res) => {
