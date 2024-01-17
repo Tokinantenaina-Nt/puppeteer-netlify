@@ -5,11 +5,7 @@ async function capture() {
     const browser = await puppeteer.launch({
         // executablePath: path.join(__dirname, 'palemoon', 'palemoon.exe'),
         executablePath: path.join(__dirname, 'Slimjet', 'slimjet.exe'),
-<<<<<<< HEAD
         // headless: true
-=======
-       // headless: true
->>>>>>> 903c983b2bc030c39269a343692a34895719aad0
     });
     const page = await browser.newPage();
 

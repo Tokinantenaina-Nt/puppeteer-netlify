@@ -34,7 +34,5 @@ router.get('/pup', async (req, res) => {
         res.status(500).send('Erreur interne du serveur');
     }
 });
-app.use(cors({
-    origin: '*'
-}));
+
 module.exports = router
