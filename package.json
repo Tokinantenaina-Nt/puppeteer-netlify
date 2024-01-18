@@ -11,11 +11,17 @@
   "license": "ISC",
   "dependencies": {
     "@sparticuz/chromium": "^119.0.2",
+    "b2-cloud-storage": "^1.0.5",
+    "backblaze": "^2.3.0",
+    "backblaze-b2": "^1.7.0",
+    "backblaze-b2-extended": "^1.0.4",
+    "backblaze-b2-updated": "^1.6.0",
     "cors": "^2.8.5",
+    "easy-backblaze": "^2.0.1",
     "express": "^4.18.2",
     "nodemon": "^3.0.2",
-    "puppeteer-core": "^13.7.0",
     "puppeteer": "^13.7.0",
+    "puppeteer-core": "^13.7.0",
     "serverless-http": "^3.2.0"
   }
 }
