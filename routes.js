@@ -37,7 +37,7 @@ router.get('/pup/:name', async (req, res) => {
             function (err, response) {
                 if (err) {
                     console.error('Une erreur s\'est produite :', err);
-                    res.status(500).send('Erreur interne du serveur ;;;', err);
+                    res.status(500).send('Erreur interne du serveur ###', err);
                 } else {
                     res.status(200).json({ message: 'Done!', response });
                 }
@@ -52,28 +52,34 @@ router.get('/pup/:name', async (req, res) => {
 });
 
 router.get('/getImageURL', (req, res) => {
-    try {
-        // URL à renvoyer
-        const imageUrl = 'https://f004.backblazeb2.com/file/screenshot-netlify/screenshot-1.png';
 
-        // Renvoyer l'URL en tant que réponse JSON
-        res.json({ imageUrl });
+    try {
+        const imageUrl = 'https://f004.backblazeb2.com/file/screenshot-netlify/screenshot-1.png';
+        res.status(200).json({ imageUrl });
     } catch (error) {
         console.error('Une erreur s\'est produite lors de la récupération de l\'URL de l\'image :', error);
         res.status(500).json({ error: 'Erreur interne du serveur' });
     }
+
 });
 router.get('/filelist', async (req, res) => {
-    await ba2.authorize();
-    let response = await ba2.listFileNames({
-        bucketId: '7aff3eb387911e8784d50612',
-        // startFileName: 'startFileName',
-        maxFileCount: 100,
-        delimiter: '',
-        prefix: ''
-    });
-    res.json(response.data);
-    console.log(response.data);
+
+    let response;
+    try {
+        await ba2.authorize();
+        response = await ba2.listFileNames({
+            bucketId: '7aff3eb387911e8784d50612',
+            maxFileCount: 100,
+            delimiter: '',
+            prefix: '',
+        });
+        res.status(200).json(response.data);
+        console.log(response.data);
+    } catch (error) {
+        console.error('Une erreur s\'est produite :', error);
+        res.status(500).send('Erreur interne du serveur');
+    }
+
 
 
 })
