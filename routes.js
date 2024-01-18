@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer-core')
-//const chromium = require('@sparticuz/chromium')
+const chromium = require('@sparticuz/chromium')
 const express = require('express')
 const router = express.Router()
 const b2 = require('./backblaze.upload');
