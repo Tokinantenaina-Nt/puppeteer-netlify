@@ -40,7 +40,7 @@ router.get('/pup/:name', async (req, res) => {
         await browser.close();
     } catch (error) {
         console.error('Une erreur s\'est produite :', error);
-        res.status(500).send('Erreur interne du serveur');
+        res.status(500).send('Erreur interne du serveur ::: ', error);
     }
 });
 
