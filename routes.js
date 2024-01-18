@@ -28,7 +28,7 @@ router.get('/pup/:name', async (req, res) => {
         await page.goto('https://www.flashscore.mobi/?s=2');
 
         const screenshot = await page.screenshot();
-        await browser.close();
+
 
         await b2.uploadFile(screenshot, {
             name: `screenshot-${name}.png`, // Nom du fichier sur Backblaze B2
@@ -37,6 +37,7 @@ router.get('/pup/:name', async (req, res) => {
             res.json({ message: 'Done!', err, response });
         });
 
+        await browser.close();
     } catch (error) {
         console.error('Une erreur s\'est produite :', error);
         res.status(500).send('Erreur interne du serveur');
