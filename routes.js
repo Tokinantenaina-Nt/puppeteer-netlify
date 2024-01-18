@@ -33,7 +33,7 @@ router.get('/pup/:name', async (req, res) => {
         await b2.uploadFile(screenshot, {
             name: `screenshot-${name}.png`, // Nom du fichier sur Backblaze B2
             bucket: 'screenshot-netlify',
-        }, function (err, response) {
+        }, await function (err, response) {
             res.json({ message: 'Done!', err, response });
         });
 
