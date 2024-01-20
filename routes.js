@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer-core')
-// const chromium = require('@sparticuz/chromium')
+const chromium = require('@sparticuz/chromium')
 const axios = require('axios')
 const express = require('express')
 const router = express.Router()
@@ -38,12 +38,12 @@ router.get('/pup/:name', async (req, res) => {
     const name = req.params.name;
     try {
         const browser = await puppeteer.launch({
-            executablePath: 'E:\\Slimjet\\slimjet.exe'
-            // args: chromium.args,
-            // defaultViewport: chromium.defaultViewport,
-            // executablePath: await chromium.executablePath(),
-            // headless: chromium.headless,
-            // ignoreHTTPSErrors: true,
+            // executablePath: 'E:\\Slimjet\\slimjet.exe'
+            args: chromium.args,
+            defaultViewport: chromium.defaultViewport,
+            executablePath: await chromium.executablePath(),
+            headless: chromium.headless,
+            ignoreHTTPSErrors: true,
         });
         const page = await browser.newPage();
         await page.goto('https://www.flashscore.mobi/?s=2');
