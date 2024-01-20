@@ -40,14 +40,14 @@ router.get('/pup/:name/:click?', async (req, res) => {
 
             return linksArray;
         });
-        let mess_ok = ''
+        let mess_ok = 'Capture d\'écran uploadée avec succès!'
         const handleConsoleMessage = async (linkHandle) => {
             if (linkHandle) {
                 const index = parseInt(linkHandle.replace('click', '')) - 1;
                 if (index >= 0 && index < linksArray.length) {
                     console.log(`Executing command: ${linkHandle}`);
                     await page.goto(linksArray[index]);
-                    mess_ok = 'Capture d\'écran uploadée avec succès!'
+
                 } else {
                     mess_ok = 'Index invalide.'
                     console.log('Index invalide.');
