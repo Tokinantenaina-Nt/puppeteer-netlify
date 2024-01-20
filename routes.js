@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer-core')
-const chromium = require('@sparticuz/chromium')
+//const chromium = require('@sparticuz/chromium')
 const axios = require('axios')
 const express = require('express')
 const router = express.Router()
@@ -17,30 +17,32 @@ router.get('/pup/:name/:click?', async (req, res) => {
     const click = req.params.click
     try {
         const browser = await puppeteer.launch({
-            // executablePath: 'E:\\Slimjet\\slimjet.exe'
-            args: chromium.args,
-            defaultViewport: chromium.defaultViewport,
-            executablePath: await chromium.executablePath(),
-            headless: chromium.headless,
-            ignoreHTTPSErrors: true,
+            executablePath: 'E:\\Slimjet\\slimjet.exe'
+            // args: chromium.args,
+            // defaultViewport: chromium.defaultViewport,
+            // executablePath: await chromium.executablePath(),
+            // headless: chromium.headless,
+            // ignoreHTTPSErrors: true,
         });
         const page = await browser.newPage();
         await page.goto('https://www.flashscore.mobi/?s=2');
+        await page.waitForSelector('#score-data');
+        const linksArray = await page.evaluate(() => {
+            const liveLinks = document.querySelectorAll('#score-data a.live');
+
+            const linksArray = [];
+
+            liveLinks.forEach((link, index) => {
+                const existingText = link.textContent.trim();
+                link.textContent = existingText + ' click ' + (index + 1);
+                linksArray.push(link.href);
+            });
+
+            return linksArray;
+        });
         if (click) {
             console.log('click  = = = = =   ', click);
-            const linksArray = await page.evaluate(() => {
-                const liveLinks = document.querySelectorAll('#score-data a.live');
 
-                const linksArray = [];
-
-                liveLinks.forEach((link, index) => {
-                    const existingText = link.textContent.trim();
-                    link.textContent = existingText + ' click ' + (index + 1);
-                    linksArray.push(link.href);
-                });
-
-                return linksArray;
-            });
             const handleConsoleMessage = async (linkHandle) => {
                 if (linkHandle) {
                     const index = parseInt(linkHandle.replace('click', '')) - 1;
