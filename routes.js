@@ -40,13 +40,16 @@ router.get('/pup/:name/:click?', async (req, res) => {
 
             return linksArray;
         });
+        let mess_ok = ''
         const handleConsoleMessage = async (linkHandle) => {
             if (linkHandle) {
                 const index = parseInt(linkHandle.replace('click', '')) - 1;
                 if (index >= 0 && index < linksArray.length) {
                     console.log(`Executing command: ${linkHandle}`);
                     await page.goto(linksArray[index]);
+                    mess_ok = 'Capture d\'écran uploadée avec succès!'
                 } else {
+                    mess_ok = 'Index invalide.'
                     console.log('Index invalide.');
                 }
             }
@@ -64,7 +67,7 @@ router.get('/pup/:name/:click?', async (req, res) => {
         const bucketId = '7aff3eb387911e8784d50612'
 
         const fileNamesResponse = await ba2.listFileNames({ bucketName, prefix: fileName, bucketId });
-        async function uploadFile() {
+        async function uploadFile(mess) {
             await b2.uploadFile(screenshot, {
                 name: `screenshot-${name}.png`,
                 bucket: 'screenshot-netlify',
@@ -74,18 +77,18 @@ router.get('/pup/:name/:click?', async (req, res) => {
                     res.status(500).send('Erreur interne du serveur : ' + err.message);
                 } else {
                     console.log('Upload réussi sur Backblaze B2 :', response);
-                    res.status(200).json({ message: 'Capture d\'écran uploadée avec succès!', response });
+                    res.status(200).json({ message: mess, response });
                 }
             });
         }
         if (fileNamesResponse.data.files.length === 0) {
             console.log('Le fichier exact n\'a pas été trouvé.');
-            uploadFile()
+            uploadFile(mess_ok)
         } else {
             const fileId = fileNamesResponse.data.files[0].fileId;
             await ba2.deleteFileVersion({ fileId, prefix: fileName, fileName, bucketId });
             console.log(`Suppression de la version ${fileId}`);
-            uploadFile()
+            uploadFile(mess_ok)
         }
         await browser.close();
 
