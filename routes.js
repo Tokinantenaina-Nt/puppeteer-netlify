@@ -40,20 +40,19 @@ router.get('/pup/:name/:click?', async (req, res) => {
 
             return linksArray;
         });
+        const handleConsoleMessage = async (linkHandle) => {
+            if (linkHandle) {
+                const index = parseInt(linkHandle.replace('click', '')) - 1;
+                if (index >= 0 && index < linksArray.length) {
+                    console.log(`Executing command: ${linkHandle}`);
+                    await page.goto(linksArray[index]);
+                } else {
+                    console.log('Index invalide.');
+                }
+            }
+        };
         if (click) {
             console.log('click  = = = = =   ', click);
-
-            const handleConsoleMessage = async (linkHandle) => {
-                if (linkHandle) {
-                    const index = parseInt(linkHandle.replace('click', '')) - 1;
-                    if (index >= 0 && index < linksArray.length) {
-                        console.log(`Executing command: ${linkHandle}`);
-                        await page.goto(linksArray[index]);
-                    } else {
-                        console.log('Index invalide.');
-                    }
-                }
-            };
             handleConsoleMessage(click)
         }
         await page.waitForTimeout(3000);
@@ -63,7 +62,7 @@ router.get('/pup/:name/:click?', async (req, res) => {
         await ba2.authorize();
         const fileName = `screenshot-${name}.png`;
         const bucketId = '7aff3eb387911e8784d50612'
-        // Recherche du fichier avec un nom exact dans le bucket
+
         const fileNamesResponse = await ba2.listFileNames({ bucketName, prefix: fileName, bucketId });
         async function uploadFile() {
             await b2.uploadFile(screenshot, {
