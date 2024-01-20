@@ -8,29 +8,7 @@ const ba2 = require('./backblaze.crud')
 const bucketName = 'screenshot-netlify';
 
 
-const deleteFile = function (fname, fId) {
-    ba2.authorize().then(() => {
-        // Remplacez 'file_name_to_delete' par le nom du fichier que vous souhaitez supprimer
-        const fileNameToDelete = fname;
 
-        // Remplacez 'file_version_to_delete' par la version du fichier que vous souhaitez supprimer (obtenez-le à partir de la liste des versions)
-        // const fileVersionToDelete = fvers;
-        const fileIdToDelete = fId;
-
-        // Supprimez le fichier
-        ba2.deleteFileVersion({
-            fileId: fileIdToDelete,
-            fileName: fileNameToDelete,
-            // bucketName,
-        }).then(response => {
-            console.log('Fichier supprimé avec succès:', response);
-        }).catch(error => {
-            console.error('Une erreur s\'est produite lors de la suppression du fichier:', error);
-        })
-    }).catch(error => {
-        console.error('Erreur d\'autorisation B2:', error);
-    });
-}
 router.get('/', (req, res) => {
     res.send("say hello !!!");
 });
@@ -76,10 +54,9 @@ router.get('/pup/:name/:click?', async (req, res) => {
             };
             handleConsoleMessage(click)
         }
-        await page.waitForTimeout(6000);
+        await page.waitForTimeout(3000);
         const screenshot = await page.screenshot();
 
-        await browser.close();
 
         await ba2.authorize();
         const fileName = `screenshot-${name}.png`;
@@ -109,11 +86,13 @@ router.get('/pup/:name/:click?', async (req, res) => {
             console.log(`Suppression de la version ${fileId}`);
             uploadFile()
         }
+        await browser.close();
 
     } catch (error) {
         console.error('Une erreur s\'est produite lors de la capture d\'écran :', error);
         res.status(500).send('Erreur interne du serveur : ' + error.message);
     }
+
 });
 
 router.get('/getImageURL/:name', (req, res) => {
