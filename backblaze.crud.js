@@ -10,7 +10,7 @@ async function GetBucket() {
     try {
         await ba2.authorize(); // must authorize first (authorization lasts 24 hrs)
         let response = await ba2.getBucket({ bucketName: 'screenshot-netlify' });
-        //console.log(response.data);
+        console.log(response.data);
 
     } catch (err) {
         console.log('Error getting bucket:', err);
@@ -18,4 +18,6 @@ async function GetBucket() {
 
 }
 
-module.exports = ba2
+
+
+module.exports = ba2 
