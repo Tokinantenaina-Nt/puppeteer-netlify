@@ -76,7 +76,7 @@ router.get('/pup/:name/:click?', async (req, res) => {
             };
             handleConsoleMessage(click)
         }
-        await page.waitForTimeout(3000);
+        await page.waitForTimeout(10000);
         const screenshot = await page.screenshot();
 
         await browser.close();
