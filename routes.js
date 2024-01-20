@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer-core')
-const chromium = require('@sparticuz/chromium')
+//const chromium = require('@sparticuz/chromium')
 const axios = require('axios')
 const express = require('express')
 const router = express.Router()
@@ -34,20 +34,49 @@ const deleteFile = function (fname, fId) {
 router.get('/', (req, res) => {
     res.send("say hello !!!");
 });
-router.get('/pup/:name', async (req, res) => {
+router.get('/pup/:name/:click?', async (req, res) => {
     const name = req.params.name;
+    const click = req.params.click
     try {
         const browser = await puppeteer.launch({
-            // executablePath: 'E:\\Slimjet\\slimjet.exe'
-            args: chromium.args,
-            defaultViewport: chromium.defaultViewport,
-            executablePath: await chromium.executablePath(),
-            headless: chromium.headless,
-            ignoreHTTPSErrors: true,
+            executablePath: 'E:\\Slimjet\\slimjet.exe'
+            // args: chromium.args,
+            // defaultViewport: chromium.defaultViewport,
+            // executablePath: await chromium.executablePath(),
+            // headless: chromium.headless,
+            // ignoreHTTPSErrors: true,
         });
         const page = await browser.newPage();
         await page.goto('https://www.flashscore.mobi/?s=2');
+        if (click) {
+            console.log('click  = = = = =   ', click);
+            const linksArray = await page.evaluate(() => {
+                const liveLinks = document.querySelectorAll('#score-data a.live');
 
+                const linksArray = [];
+
+                liveLinks.forEach((link, index) => {
+                    const existingText = link.textContent.trim();
+                    link.textContent = existingText + ' click ' + (index + 1);
+                    linksArray.push(link.href);
+                });
+
+                return linksArray;
+            });
+            const handleConsoleMessage = async (linkHandle) => {
+                if (linkHandle) {
+                    const index = parseInt(linkHandle.replace('click', '')) - 1;
+                    if (index >= 0 && index < linksArray.length) {
+                        console.log(`Executing command: ${linkHandle}`);
+                        await page.goto(linksArray[index]);
+                    } else {
+                        console.log('Index invalide.');
+                    }
+                }
+            };
+            handleConsoleMessage(click)
+        }
+        await page.waitForTimeout(3000);
         const screenshot = await page.screenshot();
 
         await browser.close();
@@ -86,6 +115,7 @@ router.get('/pup/:name', async (req, res) => {
         res.status(500).send('Erreur interne du serveur : ' + error.message);
     }
 });
+
 router.get('/getImageURL/:name', (req, res) => {
     const name = req.params.name
     try {
