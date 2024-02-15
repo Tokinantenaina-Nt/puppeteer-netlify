@@ -1,5 +1,5 @@
 const puppeteer = require("puppeteer-core");
-//const chromium = require('@sparticuz/chromium');
+const chromium = require("@sparticuz/chromium");
 const axios = require("axios"); // football.tomorrow.odds
 const express = require("express");
 const router = express.Router();
@@ -69,12 +69,12 @@ router.get(
     console.log("url_target:", url_target);
     try {
       const browser = await puppeteer.launch({
-        executablePath: "E:\\Slimjet_fonctionnel_win8\\slimjet.exe"
-        // args: chromium.args,
-        // defaultViewport: chromium.defaultViewport,
-        // executablePath: await chromium.executablePath(),
-        // headless: chromium.headless,
-        // ignoreHTTPSErrors: true,
+        // executablePath: "E:\\Slimjet_fonctionnel_win8\\slimjet.exe"
+        args: chromium.args,
+        defaultViewport: chromium.defaultViewport,
+        executablePath: await chromium.executablePath(),
+        headless: chromium.headless,
+        ignoreHTTPSErrors: true
       });
       const page = await browser.newPage();
 
