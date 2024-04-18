@@ -18,11 +18,11 @@
     "backblaze-b2-extended": "^1.0.4",
     "backblaze-b2-updated": "^1.6.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "easy-backblaze": "^2.0.1",
     "express": "^4.18.2",
     "node-backblaze-b2": "^1.0.7-c",
     "nodemon": "^3.0.2",
-    "puppeteer": "^13.7.0",
     "puppeteer-core": "^13.7.0",
     "serverless-http": "^3.2.0"
   }

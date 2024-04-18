@@ -1,23 +1,11 @@
-const Ba2 = require('backblaze-b2');
-const applicationKeyId = '004afe371e745620000000001';
-const applicationKey = 'K004PLz3QC+yCgHyEvn89TtIJL1GDAw';
+require("dotenv").config();
+//ici on utilise backblaze-b2
+const Ba2 = require("backblaze-b2");
+const applicationKeyId = process.env.applicationKeyId;
+const applicationKey = process.env.applicationKey;
 const ba2 = new Ba2({
-    applicationKeyId: applicationKeyId, // or accountId: 'accountId'
-    applicationKey: applicationKey // or masterApplicationKey
+  applicationKeyId: applicationKeyId,
+  applicationKey: applicationKey
 });
 
-async function GetBucket() {
-    try {
-        await ba2.authorize(); // must authorize first (authorization lasts 24 hrs)
-        let response = await ba2.getBucket({ bucketName: 'screenshot-netlify' });
-        console.log(response.data);
-
-    } catch (err) {
-        console.log('Error getting bucket:', err);
-    }
-
-}
-
-
-
-module.exports = ba2 
+module.exports = ba2;

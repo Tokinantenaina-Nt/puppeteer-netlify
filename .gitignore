@@ -9,3 +9,4 @@ script.js
 scr.js
 script.puppeteer.js
 userdata/
+.env

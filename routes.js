@@ -1,6 +1,6 @@
 const puppeteer = require("puppeteer-core");
-const chromium = require("@sparticuz/chromium");
-const axios = require("axios"); // football.tomorrow.odds
+// const chromium = require("@sparticuz/chromium"); // commenter ceci en mode localhost
+const axios = require("axios");
 const express = require("express");
 const router = express.Router();
 const b2 = require("./backblaze.upload");
@@ -23,18 +23,18 @@ router.get("/", (req, res) => {
 // const E = 'https://www.flashscore.mobi/?d=1&s=5'; // football.tomorrow.odds
 router.get(
   [
-    "/pup/:name/:click?",
-    "/:id/football_today_finished/:name/:click?",
-    "/football_live/:name",
-    "/:id/football_today/:name",
-    "/:id/football_tomorrow/:name",
-    "/:id/football_yesterday/:name/:click?"
+    "/pup/:name/:click?", // acceuil
+    "/:id/football_today_finished/:name/:click?", // finished
+    "/football_live/:name", // live
+    "/:id/football_today/:name", // match
+    "/:id/football_tomorrow/:name", // demain
+    "/:id/football_yesterday/:name/:click?" // resultat
   ],
   async (req, res) => {
     const { name, click, id } = req.params;
     console.log(usersArray);
     console.log(id);
-    // Convertir id en entier
+
     const idAsInt = parseInt(id, 10);
 
     if (!isNaN(idAsInt) && usersArray.includes(idAsInt)) {
@@ -69,12 +69,12 @@ router.get(
     console.log("url_target:", url_target);
     try {
       const browser = await puppeteer.launch({
-        // executablePath: "E:\\Slimjet_fonctionnel_win8\\slimjet.exe"
-        args: chromium.args,
-        defaultViewport: chromium.defaultViewport,
-        executablePath: await chromium.executablePath(),
-        headless: chromium.headless,
-        ignoreHTTPSErrors: true
+        executablePath: "E:\\Slimjet_fonctionnel_win8\\slimjet.exe" //commenter ceci en mode netlify
+        // args: chromium.args,
+        // defaultViewport: chromium.defaultViewport,
+        // executablePath: await chromium.executablePath(),
+        // headless: chromium.headless,
+        // ignoreHTTPSErrors: true
       });
       const page = await browser.newPage();
 
