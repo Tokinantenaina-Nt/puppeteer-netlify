@@ -14,12 +14,7 @@ let url_target,
 router.get("/", (req, res) => {
   res.send("say hello !!!");
 });
-/*, '/football_live/:name', '/football_today/:name/:click?', '/football_yesterday/:name/:click?', '/football_tomorrow/:name/:click?', '/football_today_finished/:name/:click?']*/
-// const A = 'https://www.flashscore.mobi/?s=2'; // football.LIVE + click
-// const B = 'https://www.flashscore.mobi/?d=0&s=5'; // football.today.odds
-// const C = 'https://www.flashscore.mobi/?d=-1&s=5'; // football.yesterday.odds + click
-// const D = 'https://www.flashscore.mobi/?d=0&s=3'; // football.today.finished + click
-// const E = 'https://www.flashscore.mobi/?d=1&s=5'; // football.tomorrow.odds
+
 router.get(
   [
     "/pup/:name/:click?", // acceuil
