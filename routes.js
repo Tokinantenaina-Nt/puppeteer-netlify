@@ -1,6 +1,5 @@
 const puppeteer = require("puppeteer-core");
-// const chromium = require("@sparticuz/chromium"); // commenter ceci en mode localhost
-const axios = require("axios");
+const chromium = require("@sparticuz/chromium"); // commenter ceci en mode localhost
 const express = require("express");
 const router = express.Router();
 const b2 = require("./backblaze.upload");
@@ -69,12 +68,12 @@ router.get(
     console.log("url_target:", url_target);
     try {
       const browser = await puppeteer.launch({
-        executablePath: "E:\\Slimjet_fonctionnel_win8\\slimjet.exe" //commenter ceci en mode netlify
-        // args: chromium.args,
-        // defaultViewport: chromium.defaultViewport,
-        // executablePath: await chromium.executablePath(),
-        // headless: chromium.headless,
-        // ignoreHTTPSErrors: true
+        // executablePath: "E:\\Slimjet_fonctionnel_win8\\slimjet.exe" //commenter ceci en mode netlify
+        args: chromium.args,
+        defaultViewport: chromium.defaultViewport,
+        executablePath: await chromium.executablePath(),
+        headless: chromium.headless,
+        ignoreHTTPSErrors: true
       });
       const page = await browser.newPage();
 
