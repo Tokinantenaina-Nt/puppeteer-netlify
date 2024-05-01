@@ -5,8 +5,8 @@ const applicationKey = process.env.applicationKey;
 
 const Ba2 = require("backblaze-b2");
 const ba2 = new Ba2({
-  applicationKeyId: applicationKeyId,
-  applicationKey: applicationKey
+  applicationKeyId: `${applicationKeyId}`,
+  applicationKey: `${applicationKey}`
 });
 
 module.exports = ba2;
