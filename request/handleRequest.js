@@ -37,13 +37,12 @@ module.exports.handleRequest = async (req, res) => {
   //lance puppeteer
   try {
     const browser = await puppeteer.launch({
-      // executablePath: "E:\\Slimjet_fonctionnel_windows7\\slimjet.exe", //commenter ceci en mode netlify
+      // executablePath: "E:\\Slimjet_fonctionnel_windows7\\slimjet.exe" //commenter ceci en mode netlify
       args: chromium.args,
       defaultViewport: chromium.defaultViewport,
       executablePath: await chromium.executablePath(),
       headless: chromium.headless,
       ignoreHTTPSErrors: true
-      // headless: false //commenter ceci en mode netlify
     });
 
     const page = await browser.newPage();
@@ -98,14 +97,12 @@ module.exports.handleRequest = async (req, res) => {
       }
     })();
 
-    // res.send("HERE5");
-
     await page.waitForTimeout(3000);
     const screenshot = await page.screenshot();
 
     //upload vers backblaze
     await ba2.authorize();
-    res.send("HERE777777777");
+    res.send("HERE8777777");
 
     const fileName = `screenshot-${name}.png`;
     const bucketId = "7aff3eb387911e8784d50612";
