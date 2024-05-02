@@ -45,11 +45,11 @@ module.exports.handleRequest = async (req, res) => {
       ignoreHTTPSErrors: true
       // headless: false //commenter ceci en mode netlify
     });
-    res.send("HERE");
 
     const page = await browser.newPage();
     await page.goto(url_target);
     await page.waitForSelector("#score-data");
+    res.send("HERE2");
 
     //Scrapping
     let myLinksArray;
