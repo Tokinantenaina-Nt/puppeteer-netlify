@@ -74,7 +74,7 @@ module.exports.handleRequest = async (req, res) => {
           console.log(`Executing command: ${linkHandle}`);
           await page.goto(myLinksArray[index]);
         } else {
-          if (!usersArray.includes(idAsInt)) {
+          if (!userArray.includes(idAsInt)) {
             mess_ok = "utilisateur non identifié";
             console.log("utilisateur non identifié");
           } else {
