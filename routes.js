@@ -38,7 +38,7 @@ router.get("/getImageURL/:name", (req, res) => {
 //lister mes fichiers chez backblaze
 const urlList = process.env.urlList;
 const bucketId = process.env.bucketId;
-router.get(urlList, async (req, res) => {
+router.get(`${urlList}`, async (req, res) => {
   let response;
   try {
     await ba2.authorize();
