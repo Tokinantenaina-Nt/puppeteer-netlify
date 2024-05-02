@@ -8,5 +8,5 @@ script.js
 scr.js
 script.puppeteer.js
 userdata/
-test.js
+test.*
 .env
