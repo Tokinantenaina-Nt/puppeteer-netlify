@@ -67,7 +67,6 @@ module.exports.handleRequest = async (req, res) => {
       myLinksArray = linksArray; // Stockage dans la variable globale
       return linksArray;
     }
-    res.send("HERE3");
 
     const handleConsoleMessage = async linkHandle => {
       if (linkHandle) {
@@ -86,6 +85,8 @@ module.exports.handleRequest = async (req, res) => {
         }
       }
     };
+
+    res.send("HERE4");
 
     (async () => {
       if (url_target === "https://www.flashscore.mobi/?s=2") {
