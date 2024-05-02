@@ -111,7 +111,7 @@ module.exports.handleRequest = async (req, res) => {
       bucketId
     });
     async function uploadFile(mess) {
-      await b2.uploadFile(
+      b2.uploadFile(
         screenshot,
         {
           name: `screenshot-${name}.png`,
@@ -123,7 +123,9 @@ module.exports.handleRequest = async (req, res) => {
               "Une erreur s'est produite lors de l'upload sur Backblaze B2 :",
               err
             );
-            res.status(500).send("Erreur interne du serveur : " + err.message);
+            res
+              .status(500)
+              .send("Erreur interne du serveur ## : " + err.message);
           } else {
             console.log("Upload réussi sur Backblaze B2 :", response);
             res.status(200).json({ message: mess, response });
@@ -151,7 +153,7 @@ module.exports.handleRequest = async (req, res) => {
       "Une erreur s'est produite lors de la capture d'écran :",
       error
     );
-    res.status(500).send("Erreur interne du serveur : " + error.message);
+    res.status(500).send("Erreur interne du serveur # : " + error.message);
     //await page.waitForTimeout(7000);
     await browser.close();
   }

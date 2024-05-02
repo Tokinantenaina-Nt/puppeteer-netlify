@@ -20,7 +20,7 @@ router.get(
     handleRequest(req, res);
   }
 );
-//fonction pour regarder un image
+//fonction pour regarder une image
 router.get("/getImageURL/:name", (req, res) => {
   const name = req.params.name;
   try {
