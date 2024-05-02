@@ -4,7 +4,7 @@ const { handleRequest } = require("./request/handleRequest");
 const ba2 = require("./backblaze.crud");
 require("dotenv").config();
 router.get("/", (req, res) => {
-  res.send("say hello !!!");
+  res.send("Hello !!!");
 });
 
 router.get(
@@ -21,7 +21,7 @@ router.get(
   }
 );
 //fonction pour regarder une image
-router.get("/getImageURL/:name", (req, res) => {
+router.get("/getimageurl/:name", (req, res) => {
   const name = req.params.name;
   try {
     const imageUrl = `https://f004.backblazeb2.com/file/screenshot-netlify/screenshot-${name}.png`;

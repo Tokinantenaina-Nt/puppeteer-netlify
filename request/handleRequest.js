@@ -36,6 +36,7 @@ module.exports.handleRequest = async (req, res) => {
   }
   //lance puppeteer
   try {
+    res.send("HERE");
     const browser = await puppeteer.launch({
       // executablePath: "E:\\Slimjet_fonctionnel_windows7\\slimjet.exe", //commenter ceci en mode netlify
       args: chromium.args,
