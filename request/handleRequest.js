@@ -104,12 +104,12 @@ module.exports.handleRequest = async (req, res) => {
     await ba2.authorize();
 
     const fileName = `screenshot-${name}.png`;
-    const bucketId = "7aff3eb387911e8784d50612";
+    const bucketId = process.env.bucketId;
 
     const fileNamesResponse = await ba2.listFileNames({
       bucketName,
       prefix: fileName,
-      bucketId
+      bucketId: `${bucketId}`
     });
 
     async function uploadFile(mess) {
