@@ -98,7 +98,7 @@ module.exports.handleRequest = async (req, res) => {
       }
     })();
 
-    res.send("HERE5");
+    // res.send("HERE5");
 
     await page.waitForTimeout(3000);
     const screenshot = await page.screenshot();
@@ -113,6 +113,8 @@ module.exports.handleRequest = async (req, res) => {
       prefix: fileName,
       bucketId
     });
+
+    res.send("HERE6");
     async function uploadFile(mess) {
       b2.uploadFile(
         screenshot,
