@@ -86,8 +86,6 @@ module.exports.handleRequest = async (req, res) => {
       }
     };
 
-    res.send("HERE4");
-
     (async () => {
       if (url_target === "https://www.flashscore.mobi/?s=2") {
         await live("live");
@@ -99,6 +97,8 @@ module.exports.handleRequest = async (req, res) => {
         handleConsoleMessage(click);
       }
     })();
+
+    res.send("HERE5");
 
     await page.waitForTimeout(3000);
     const screenshot = await page.screenshot();
