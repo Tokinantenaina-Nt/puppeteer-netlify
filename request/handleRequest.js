@@ -105,10 +105,10 @@ module.exports.handleRequest = async (req, res) => {
 
     //upload vers backblaze
     await ba2.authorize();
+    res.send("HERE777777777");
 
     const fileName = `screenshot-${name}.png`;
     const bucketId = "7aff3eb387911e8784d50612";
-    res.send("HERE7");
 
     const fileNamesResponse = await ba2.listFileNames({
       bucketName,
