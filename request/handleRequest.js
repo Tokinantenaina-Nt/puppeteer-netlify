@@ -49,7 +49,6 @@ module.exports.handleRequest = async (req, res) => {
     const page = await browser.newPage();
     await page.goto(url_target);
     await page.waitForSelector("#score-data");
-    res.send("HERE2");
 
     //Scrapping
     let myLinksArray;
@@ -68,6 +67,7 @@ module.exports.handleRequest = async (req, res) => {
       myLinksArray = linksArray; // Stockage dans la variable globale
       return linksArray;
     }
+    res.send("HERE3");
 
     const handleConsoleMessage = async linkHandle => {
       if (linkHandle) {
