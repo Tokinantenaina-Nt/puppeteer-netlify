@@ -13,7 +13,8 @@ module.exports.handleRequest = async (req, res) => {
   console.log(id);
   const idAsInt = parseInt(id, 10);
 
-  if (!isNaN(idAsInt) && usersArray.includes(idAsInt)) {
+  // if (!isNaN(idAsInt) && usersArray.includes(idAsInt)) {
+  if (!isNaN(idAsInt)) {
     if (req.path === `/${id}/football_today_finished/${name}/${click || ""}`) {
       url_target = "https://www.flashscore.mobi/?s=3";
     }
@@ -74,13 +75,13 @@ module.exports.handleRequest = async (req, res) => {
           console.log(`Executing command: ${linkHandle}`);
           await page.goto(myLinksArray[index]);
         } else {
-          if (!usersArray.includes(idAsInt)) {
-            mess_ok = "utilisateur non identifié";
-            console.log("utilisateur non identifié");
-          } else {
-            mess_ok = "Index invalide.";
-            console.log("Index invalide.");
-          }
+          // if (!usersArray.includes(idAsInt)) {
+          mess_ok = "utilisateur non identifié";
+          console.log("utilisateur non identifié");
+          // } else {
+          mess_ok = "Index invalide.";
+          console.log("Index invalide.");
+          // }
         }
       }
     };
